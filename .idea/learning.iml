@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/bedrock/web/wp/wp-includes" isTestSource="false" packagePrefix="PHPMailer" />
+      <sourceFolder url="file://$MODULE_DIR$/bedrock/web/wp/wp-includes/SimplePie/src" isTestSource="false" packagePrefix="SimplePie" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/brianium/paratest" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/fidry/cpu-core-counter" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/filp/whoops" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/graham-campbell/result-type" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/jean85/pretty-package-versions" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/laravel/pint" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/nikic/php-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/nunomaduro/collision" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/nunomaduro/termwind" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/oscarotero/env" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/pestphp/pest" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/pestphp/pest-plugin" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/pestphp/pest-plugin-arch" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/pestphp/pest-plugin-mutate" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/pestphp/pest-plugin-profanity" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phar-io/manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phar-io/version" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phpdocumentor/reflection-common" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phpdocumentor/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phpdocumentor/type-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phpoption/phpoption" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phpstan/phpdoc-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phpunit/php-code-coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phpunit/php-file-iterator" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phpunit/php-invoker" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phpunit/php-text-template" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phpunit/php-timer" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/phpunit/phpunit" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/psr/simple-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/roots/bedrock-autoloader" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/roots/wordpress-core-installer" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/roots/wp-config" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/cli-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/comparator" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/complexity" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/diff" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/environment" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/global-state" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/lines-of-code" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/object-enumerator" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/object-reflector" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/recursion-context" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/type" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/staabm/side-effects-detector" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/symfony/console" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/symfony/polyfill-intl-grapheme" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/symfony/polyfill-intl-normalizer" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/symfony/process" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/symfony/service-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/symfony/string" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/ta-tikoma/phpunit-architecture-test" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/theseer/tokenizer" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/vlucas/phpdotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/bedrock/vendor/webmozart/assert" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
