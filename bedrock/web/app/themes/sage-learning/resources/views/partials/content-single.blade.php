@@ -16,6 +16,7 @@
       </div>
     </header>
 
+
     <div class="e-content max-w-none">
       @php(the_content())
     </div>

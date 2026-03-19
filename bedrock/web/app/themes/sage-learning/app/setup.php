@@ -7,6 +7,8 @@
 namespace App;
 
 use Illuminate\Support\Facades\Vite;
+use \App\Fields\HeroFields;
+use App\Api\Products;
 
 /**
  * Inject styles into the block editor.
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Vite;
  * @return array
  */
 add_filter('block_editor_settings_all', function ($settings) {
-    $style = Vite::asset('resources/css/editor.css');
+    $style = Vite::asset('resources/css/editor.scss');
 
     $settings['styles'][] = [
         'css' => "@import url('{$style}')",
@@ -160,4 +162,46 @@ add_action('widgets_init', function () {
         'name' => __('Footer', 'sage'),
         'id' => 'sidebar-footer',
     ] + $config);
+});
+
+
+add_filter("acf/settings/save_json", function () {
+    return get_stylesheet_directory() . '/acf-json';
+} );
+
+
+add_filter('acf/settings/load_json', function ($paths) {
+    $paths[] = get_stylesheet_directory() . '/acf-json';
+    return $paths;
+});
+
+add_action('acf/init', function() {
+    if (! function_exists('acf_add_local_field_group')) {
+        return;
+    }
+    HeroFields::register();
+});
+
+//add_action('acf/register_block_types', function () {
+//    acf_register_block_type([
+//        "name" => __("hero", "sage"),
+//        "title" => __("Hero Block", "sage"),
+//        "render_callback" => function($block) {
+//            echo view('blocks.hero', ['block' => $block]);
+//        },
+//    ]);
+//});
+
+add_action("rest_api_init", function () {
+    Products::register();
+});
+
+add_action("wp_enqueue_scripts", function () {
+//        wp_enqueue_script("sage/js", Vite::asset("resources/js/app.js"), [], "1.0.0", true);
+    wp_print_inline_script_tag(
+        'window.sageData = '. wp_json_encode([
+            'restUrl' => esc_url(rest_url('sage/v1')),
+            'nonce' => wp_create_nonce('wp_rest'),
+        ])
+    );
 });

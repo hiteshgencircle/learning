@@ -26,4 +26,5 @@
       {{ __('Read more', 'sage') }} &rarr;
     </a>
   </div>
+
 </article>
