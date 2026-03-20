@@ -6,28 +6,32 @@
     @php(do_action('get_header'))
     @php(wp_head())
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
   </head>
 
   <body @php(body_class())>
     @php(wp_body_open())
 
-    <div id="app">
+    <div id="app" class="min-h-screen flex flex-col">
       <a class="sr-only focus:not-sr-only" href="#main">
         {{ __('Skip to content', 'sage') }}
       </a>
 
       @include('sections.header')
 
-      <main id="main" class="main">
-        @yield('content')
-      </main>
+      <div class="container mx-auto px-4 lg:px-8 py-8 md:py-12 flex-grow">
+        <div class="flex flex-col lg:flex-row gap-8">
+          <main id="main" class="main flex-grow lg:w-2/3">
+            @yield('content')
+          </main>
 
-      @hasSection('sidebar')
-        <aside class="sidebar">
-          @yield('sidebar')
-        </aside>
-      @endif
+          @hasSection('sidebar')
+            <aside class="sidebar lg:w-1/3">
+              @yield('sidebar')
+            </aside>
+          @endif
+        </div>
+      </div>
 
       @include('sections.footer')
     </div>
