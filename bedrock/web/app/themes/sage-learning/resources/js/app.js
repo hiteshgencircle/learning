@@ -1,212 +1,235 @@
 import.meta.glob([
-  '../images/**',
-  '../fonts/**',
+    '../images/**',
+    '../fonts/**',
 ]);
-async function fetchProducts({category = '', src = '', page = 1}){
-  console.trace("fetchProducts called");
-  const params = new URLSearchParams({category, src, page});
 
-  const res = await fetch(`${sageData.restUrl}/products?${params}`, {
-    headers: {
-      'X-WP-Nonce': sageData.nonce
-    }
-  });
+function showLoader() {
+    document.getElementById('pb-loader').style.display = 'flex';
+    document.getElementById('pb-grid').style.display   = 'none';
+}
 
-  const products = await res.json();
+function hideLoader(delay = 800) {
+    setTimeout(() => {
+        document.getElementById('pb-loader').style.display = 'none';
+        document.getElementById('pb-grid').style.display   = 'grid';
+    }, delay);
+}
 
-  return products;
+async function fetchProducts(category = '', src = '', page = 1, tag = '') {
+    showLoader();
+    const params = new URLSearchParams({category, src, page, tag});
+
+    const res = await fetch(`${sageData.restUrl}/products?${params}`, {
+        headers: {
+            'X-WP-Nonce': sageData.nonce
+        }
+    });
+
+    const products = await res.json();
+    hideLoader();
+    return products;
 
 }
 
-
-
 (function () {
-  const PER_PAGE  = 6;
-  let page        = 1;
-  let activeCat   = 'all';
-  let searchVal   = '';
-  let tagVal      = '';
 
-  const grid      = document.getElementById('pb-grid');
-  const emptyEl   = document.getElementById('pb-empty');
-  const infoEl    = document.getElementById('pb-pag-info');
-  const btnsEl    = document.getElementById('pb-pag-btns');
-  const searchEl  = document.getElementById('pb-search');
-  const tagEl     = document.getElementById('pb-tag');
-  const tabsEl    = document.getElementById('pb-tabs');
-  const resetBtn  = document.getElementById('pb-reset');
+    const PER_PAGE = 6;
+    let page = 1;
+    let activeCat = '';
+    let searchVal = '';
+    let tagVal = '';
 
-  fetchProducts('' , '', 1).then( data => {
-    console.log(data);
-    if(!data){
-      document.getElementById("pb-empty").css("display", "block");
+    const grid = document.getElementById('pb-grid');
+    const emptyEl = document.getElementById('pb-empty');
+    const infoEl = document.getElementById('pb-pag-info');
+    const btnsEl = document.getElementById('pb-pag-btns');
+    const searchEl = document.getElementById('pb-search');
+    const tagEl = document.getElementById('pb-tag');
+    const tabsEl = document.getElementById('pb-tabs');
+    const resetBtn = document.getElementById('pb-reset');
+
+
+    fetchProducts('', '', 1, tagVal).then(data => {
+        console.log(data);
+        if (!data) {
+            document.getElementById("pb-empty").style.display = "block";
+        }
+        renderProducts(data);
+    });
+
+    function renderProducts(product_result) {
+        let product_string = '';
+        if (product_result.products && product_result.products.length > 0) {
+            product_result.products.forEach(product => {
+                product_string += '<div class="pb-card" data-title="' + product.title + '">' +
+                    '        <div class="pb-img-wrap">' +
+                    '          <img src="' + product.image + '" alt="' + product.title + '" />';
+                if (product.tags && product.tags.length > 0) {
+                    product_string += '<div class="pb-badges">';
+                    product.tags.forEach(tag => {
+                        product_string += '<span class="pb-badge new">' + tag + '</span>';
+                    });
+                    product_string += '</div>';
+                }
+
+
+                product_string += '        </div>' +
+                    '        <div class="pb-card-body">' +
+                    '          <span class="pb-card-cat">' + product.category + '</span>' +
+                    '          <h3 class="pb-card-title">' + product.title + '</h3>' +
+                    '          <div class="pb-card-foot">' +
+                    '            <span class="pb-price">$' + product.price + '</span>' +
+                    '            <a href="' + product.url + '" class="pb-btn-view"><i class="fa fa-arrow-right"></i></a>' +
+                    '          </div>' +
+                    '        </div>' +
+                    '      </div>';
+            });
+
+            document.getElementById('pb-grid').innerHTML = product_string;
+            document.getElementById('pb-pag-info').innerHTML = 'Showing ' + product_result.start_number + '–' + product_result.end_number + ' of ' + product_result.total + ' products';
+            renderPagination(product_result);
+
+        }
+
+
     }
-    renderProducts(data);
-  });
-  function renderProducts(product_result){
-    console.log(product_result.products);
-    var product_string = '';
-    if(product_result.products && product_result.products.length > 0){
-      product_result.products.forEach(product => {
-        product_string += '<div class="pb-card" data-title="'+product.title+'">' +
-          '        <div class="pb-img-wrap">' +
-          '          <img src="'+product.image+'" alt="'+product.title+'" />' +
-          '          <div class="pb-badges"><span class="pb-badge new">New</span><span class="pb-badge featured">Featured</span></div>' +
-          '        </div>' +
-          '        <div class="pb-card-body">' +
-          '          <span class="pb-card-cat">'+product.category+'</span>' +
-          '          <h3 class="pb-card-title">'+product.title+'</h3>' +
-          '          <div class="pb-card-foot">' +
-          '            <span class="pb-price">View</span>' +
-          '            <a href="'+product.url+'" class="pb-btn-view"><i class="fa fa-arrow-right"></i></a>' +
-          '          </div>' +
-          '        </div>' +
-          '      </div>' +
-          '';
-      });
 
-      document.getElementById('pb-grid').innerHTML = product_string;
+    function renderPagination(product_result) {
+        var pagination_string = '';
+        if (product_result.totalPages && product_result.totalPages > 0) {
+            let disabled_class = '';
+            if (page == 1) {
+                disabled_class = 'disabled';
+            }
+            pagination_string += '<button class="pb-pag-btn" ' + disabled_class + ' data-page="'+(page - 1)+'">' +
+                '          <i class="fa fa-chevron-left"></i>' +
+                '        </button>';
+            var active_class = "";
+
+            // var callback_func = "";
+            // var start_page = page;
+            // var end_page = product_result.totalPages;
+            let chunk_length = 5;
+            let chunk_start = 1;
+            let chunk_end = 5;
+
+            if (page >= 5) {
+                pagination_string += '<button class="pb-pag-btn"  data-page="1">1</button>';
+                pagination_string += '<button class="pb-pag-btn" disabled>...</button>';
+                chunk_start = page;
+                chunk_end = (page - 1) + chunk_length;
+            }
+
+            if((chunk_start + 5) >= product_result.totalPages){
+                chunk_start = page - 5;
+                chunk_end = page;
+            }
+            if (page == product_result.totalPages) {
+                chunk_start = page - 5;
+                chunk_end = page;
+            }
+            if(product_result.totalPages <= 5){
+                chunk_start = 1;
+                chunk_end = product_result.totalPages;
+            }
+            for (let i = chunk_start; i <= chunk_end; i++) {
+
+                if (i == page) {
+                    active_class = "active";
+                    // callback_func = "";
+                } else {
+                    active_class = "";
+                    // callback_func = `onClick="fetchProducts('${activeCat}', '${searchVal}', '${i}')"`;
+                }
+                pagination_string += '<button class="pb-pag-btn ' + active_class + '"  data-page="' + i + '">' + i + '</button>';
+            }
+            if (page < (product_result.totalPages - 5)) {
+                pagination_string += '<button class="pb-pag-btn" disabled>...</button>';
+            }
+            if (page != product_result.totalPages && product_result.totalPages >= 5) {
+                pagination_string += '<button class="pb-pag-btn" data-page="' + product_result.totalPages + '">' + product_result.totalPages + '</button>';
+            }
+            if (page == product_result.totalPages) {
+                pagination_string += '<button class="pb-pag-btn" disabled><i class="fa fa-chevron-right"></i></button>';
+            } else {
+                pagination_string += '<button class="pb-pag-btn" data-page="'+(page + 1)+'"><i class="fa fa-chevron-right"></i></button>';
+            }
+
+        }
+
+
+        document.getElementById('pb-pag-btns').innerHTML = pagination_string;
     }
 
 
-  }
+    document.getElementById('pb-pag-btns').addEventListener('click', (e) => {
 
-  // All real cards (not the empty-state div)
-  /*function allCards() {
-    return [...grid.querySelectorAll('.pb-card')];
-  }
-
-
-  function getVisible() {
-    return allCards().filter(c => {
-      const matchCat    = activeCat === 'all' || c.dataset.cat === activeCat;
-      const matchSearch = !searchVal || c.dataset.title.includes(searchVal);
-      const matchTag    = !tagVal    || c.dataset.tags.split(',').includes(tagVal);
-      return matchCat && matchSearch && matchTag;
-    });
-  }
-
-  function render() {
-    const visible = getVisible();
-    const total   = visible.length;
-    const pages   = Math.max(1, Math.ceil(total / PER_PAGE));
-    if (page > pages) page = pages;
-
-    const start = (page - 1) * PER_PAGE;
-    const end   = start + PER_PAGE;
-
-    allCards().forEach(c => c.classList.add('pb-hide'));
-    visible.forEach((c, i) => {
-      if (i >= start && i < end) c.classList.remove('pb-hide');
+        const btn = e.target.closest('.pb-pag-btn');
+        if (!btn) return;
+        if (btn.classList.contains('active')) return;
+        if (btn.disabled) return;
+        page = parseInt(btn.dataset.page);
+        console.log(page);
+        fetchProducts(activeCat, searchVal, page, tagVal).then(data => {
+            if (!data) {
+                document.getElementById("pb-empty").style.display = "block";
+            }
+            renderProducts(data);
+        });
     });
 
-    // Empty state
-    emptyEl.style.display = total === 0 ? 'block' : 'none';
+    const category_tab = document.getElementsByClassName('pb-tab-btn');
 
-    // Update tab pills
-    // updatePills();
+        Array.from(category_tab).forEach((element) => {
+            element.addEventListener('click', (e) => {
+                activeCat = e.target.dataset.cat;
+                document.querySelectorAll('.pb-tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                e.target.classList.add('active');
+                console.log(activeCat);
+                page = 1;
+                fetchProducts(activeCat, searchVal, page, tagVal).then(data => {
+                    if (!data) {
+                        document.getElementById("pb-empty").style.display = "block";
+                    }
+                    renderProducts(data);
+                });
+            })
+        });
 
-    // Info
-    infoEl.textContent = total > 0
-      ? `Showing ${start + 1}–${Math.min(end, total)} of ${total} products`
-      : '';
+    document.getElementById('pb-tag').addEventListener('change', function () {
+        const value = this.value;
+        console.log(value);
 
-    renderPagination(pages, total);
-  }
-
-  function updatePills() {
-    tabsEl.querySelectorAll('.pb-tab-btn').forEach(btn => {
-      const cat = btn.dataset.cat;
-      const count = cat === 'all'
-        ? getFilteredCount('all')
-        : getFilteredCount(cat);
-      btn.querySelector('.pb-pill').textContent = count;
-    });
-  }
-
-  function getFilteredCount(cat) {
-    return allCards().filter(c => {
-      const matchCat    = cat === 'all' || c.dataset.cat === cat;
-      const matchSearch = !searchVal || c.dataset.title.includes(searchVal);
-      const matchTag    = !tagVal    || c.dataset.tags.split(',').includes(tagVal);
-      return matchCat && matchSearch && matchTag;
-    }).length;
-  }
-
-  function renderPagination(pages, total) {
-    btnsEl.innerHTML = '';
-    if (total === 0 || pages <= 1) return;
-
-    // Prev
-    const prev = btn('<i class="fa fa-chevron-left"></i>', page === 1, () => { page--; render(); });
-    btnsEl.appendChild(prev);
-
-    // Page numbers
-    pageRange(page, pages).forEach(p => {
-      if (p === '…') {
-        const dot = document.createElement('button');
-        dot.className = 'pb-pag-btn';
-        dot.textContent = '…';
-        dot.disabled = true;
-        btnsEl.appendChild(dot);
-      } else {
-        const b = btn(p, false, () => { page = p; render(); });
-        if (p === page) b.classList.add('active');
-        btnsEl.appendChild(b);
-      }
+        tagVal = value;
+        console.log(tagVal);
+        page = 1;
+        fetchProducts(activeCat, searchVal, page, tagVal).then(data => {
+            if (!data) {
+                document.getElementById("pb-empty").style.display = "block";
+            }
+            renderProducts(data);
+        });
     });
 
-    // Next
-    const next = btn('<i class="fa fa-chevron-right"></i>', page === pages, () => { page++; render(); });
-    btnsEl.appendChild(next);
-  }
+    document.getElementById('pb-search').addEventListener('keyup', (e) => {
 
-  function btn(label, disabled, onClick) {
-    const b = document.createElement('button');
-    b.className = 'pb-pag-btn';
-    b.innerHTML = label;
-    b.disabled = disabled;
-    b.addEventListener('click', onClick);
-    return b;
-  }
+        const value = e.target.value;
+        console.log(value);
 
-  function pageRange(cur, total) {
-    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
-    if (cur <= 4)   return [1, 2, 3, 4, 5, '…', total];
-    if (cur >= total - 3) return [1, '…', total-4, total-3, total-2, total-1, total];
-    return [1, '…', cur-1, cur, cur+1, '…', total];
-  }
+        searchVal = value;
+        console.log(searchVal);
+        page = 1;
+        fetchProducts(activeCat, searchVal, page, tagVal).then(data => {
+            if (!data) {
+                document.getElementById("pb-empty").style.display = "block";
+            }
+            renderProducts(data);
+        });
 
-  // ── Events ────────────────────────────────
-  searchEl.addEventListener('input', () => {
-    searchVal = searchEl.value.toLowerCase().trim();
-    page = 1; render();
-  });
+    });
 
-  tagEl.addEventListener('change', () => {
-    tagVal = tagEl.value;
-    page = 1; render();
-  });
 
-  tabsEl.addEventListener('click', e => {
-    const tab = e.target.closest('.pb-tab-btn');
-    if (!tab) return;
-    tabsEl.querySelectorAll('.pb-tab-btn').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    activeCat = tab.dataset.cat;
-    page = 1; render();
-  });
 
-  resetBtn.addEventListener('click', () => {
-    searchEl.value = '';
-    tagEl.value    = '';
-    searchVal = ''; tagVal = '';
-    activeCat = 'all'; page = 1;
-    tabsEl.querySelectorAll('.pb-tab-btn').forEach(t => t.classList.remove('active'));
-    tabsEl.querySelector('[data-cat="all"]').classList.add('active');
-    render();
-  });
-
-  // ── Init ──────────────────────────────────
-  render();*/
 })();

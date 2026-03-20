@@ -532,3 +532,29 @@
   color: #fff;
 }
 .pb-pag-btn:disabled { opacity: .35; cursor: not-allowed; }
+
+.pb-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    transition: opacity .4s ease;
+}
+
+.pb-loader.pb-fade {
+    opacity: 0;
+}
+
+.pb-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e5e1da;
+    border-top-color: #b45309;
+    border-radius: 50%;
+    animation: pb-spin .7s linear infinite;
+}
+
+@keyframes pb-spin {
+    to { transform: rotate(360deg); }
+}
+
