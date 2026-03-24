@@ -62,9 +62,7 @@
 
     </div><!-- /pb-grid -->
     <div class="pb-empty" id="pb-empty">
-      <i class="fa fa-search"></i>
       <p>No products match your filters.</p>
-      <button class="pb-empty-btn" id="pb-reset">Clear filters</button>
     </div>
     <!-- Pagination -->
     <div class="pb-pagination" id="pb-pagination">

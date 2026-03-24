@@ -12,8 +12,8 @@ export default defineConfig({
   plugins: [
     laravel({
       input: [
-        'resources/css/app.scss',
-        'resources/js/app.js',
+        // 'resources/css/app.scss',
+        // 'resources/js/app.js',
         'resources/css/editor.scss',
         'resources/js/editor.js',
       ],
@@ -25,10 +25,10 @@ export default defineConfig({
     // Generate the theme.json file in the public/build/assets directory
     // based on the Tailwind config and the theme.json file from base theme folder
     wordpressThemeJson({
-      disableTailwindColors: true,
-      disableTailwindFonts: true,
-      disableTailwindFontSizes: true,
-      disableTailwindBorderRadius: true,
+      disableTailwindColors: false,
+      disableTailwindFonts: false,
+      disableTailwindFontSizes: false,
+      disableTailwindBorderRadius: false,
     }),
   ],
   resolve: {

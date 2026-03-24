@@ -11,6 +11,8 @@
       <sourceFolder url="file://$MODULE_DIR$/web/app/plugins/woocommerce/packages/email-editor/vendor-prefixed/packages/Symfony/Polyfill/Php80/" isTestSource="false" packagePrefix="Symfony\Polyfill\Php80\" />
       <sourceFolder url="file://$MODULE_DIR$/web/app/themes/sage-learning/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/web/app/themes/sage-learning/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brianium/paratest" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/deprecations" />
@@ -171,6 +173,7 @@
       <excludeFolder url="file://$MODULE_DIR$/web/app/themes/sage-learning/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/web/app/themes/sage-learning/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/web/app/themes/sage-learning/vendor/voku/portable-ascii" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/fakerphp/faker" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
