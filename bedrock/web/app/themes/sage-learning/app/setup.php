@@ -220,7 +220,7 @@ add_action("wp_enqueue_scripts", function () {
 });
 
 add_action("wp_enqueue_scripts", function () {
-    wp_enqueue_style("gangtey_style", get_stylesheet_directory_uri() . '/resources/css/style.css');
+    wp_enqueue_style("gangtey_style", get_stylesheet_directory_uri() . '/resources/css/style.css', [], time());
 
     wp_enqueue_script("jquery");
 

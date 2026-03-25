@@ -3,11 +3,15 @@
     if($section["background_image"]){
         $background_image = "style='background-image: url(".$section["background_image"]["url"].")'";
     }
+    $full_width_classes = "";
+    if($section["full_width"]){
+        $full_width_classes = "!px-0";
+    }
 @endphp
 
-<section class="full-img-content bg-lightgold py-50 lgscreen:py-30 relative">
+<section class="full-img-content  relative {{$section["css_classes"]}}">
 
-    <div class="container-fluid relative">
+    <div class="container-fluid relative {{$full_width_classes}}">
         <div class="full-img-content-inner relative h-[585px] bg-cover" {!! $background_image !!}>
             <div class="relative z-9 h-full flex flex-col justify-center items-center px-20 text-center">
                 <div class="title-white w-[600px] lgscreen:w-full px-15">
