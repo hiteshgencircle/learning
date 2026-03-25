@@ -5,6 +5,7 @@ class Builder extends Composer{
     protected static $views = [
         'front-page',
         'template-stay',
+        'single-stay',
     ];
 
     public function with(){

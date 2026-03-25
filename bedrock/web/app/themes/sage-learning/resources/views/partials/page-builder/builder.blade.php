@@ -28,6 +28,15 @@
             @case("three_column_with_slider")
                 @include('partials.page-builder.three-column-with-slider')
                 @break
+            @case("three_column_with_bottom_cta")
+                @include('partials.page-builder.three-column-with-bottom-cta')
+                @break
+            @case("left_align_slider")
+                @include('partials.page-builder.left-align-slider')
+                @break
+            @case("two_column_with_tabbed_content")
+                @include('partials.page-builder.two-column-with-tabbed-content')
+                @break
         @endswitch
     @endforeach
 @endif
