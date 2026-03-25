@@ -9,7 +9,8 @@ namespace App;
 use Illuminate\Support\Facades\Vite;
 use \App\Fields\HeroFields;
 use App\Api\Products;
-
+use App\PostTypes\Stay;
+define("STAY_POST_TYPE", "stay");
 /**
  * Inject styles into the block editor.
  *
@@ -189,6 +190,9 @@ add_action('acf/init', function() {
         return;
     }
     HeroFields::register();
+});
+add_action("init", function() {
+    Stay::register();
 });
 
 //add_action('acf/register_block_types', function () {

@@ -4,6 +4,7 @@ use Roots\Acorn\View\Composer;
 class Builder extends Composer{
     protected static $views = [
         'front-page',
+        'template-stay',
     ];
 
     public function with(){
