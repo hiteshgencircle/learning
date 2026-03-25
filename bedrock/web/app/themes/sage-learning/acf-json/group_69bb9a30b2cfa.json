@@ -1,0 +1,189 @@
+{
+    "key": "group_69bb9a30b2cfa",
+    "title": "Flexible content",
+    "fields": [
+        {
+            "key": "field_69bb9a3c8259e",
+            "label": "Builder",
+            "name": "builder",
+            "aria-label": "",
+            "type": "flexible_content",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layouts": {
+                "layout_69bb9a40b5e36": {
+                    "key": "layout_69bb9a40b5e36",
+                    "name": "first_row",
+                    "label": "First Row",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_69bb9a718259f",
+                            "label": "Short description",
+                            "name": "short_description",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_69bb9a718259f",
+                            "label": "Short description",
+                            "name": "short_description",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_69bb9aa0825a0",
+                            "label": "Age Group",
+                            "name": "age_group",
+                            "aria-label": "",
+                            "type": "checkbox",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "13 - 18",
+                                "2": "19 - 30",
+                                "3": "30 - 40",
+                                "4": "40 - 60",
+                                "5": "60+"
+                            },
+                            "default_value": [
+                                "Select"
+                            ],
+                            "return_format": "array",
+                            "allow_custom": 0,
+                            "allow_in_bindings": 0,
+                            "layout": "vertical",
+                            "toggle": 0,
+                            "save_custom": 0,
+                            "custom_choice_button_text": "Add new choice"
+                        },
+                        {
+                            "key": "field_69bb9aa0825a0",
+                            "label": "Age Group",
+                            "name": "age_group",
+                            "aria-label": "",
+                            "type": "checkbox",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "13 - 18",
+                                "2": "19 - 30",
+                                "3": "30 - 40",
+                                "4": "40 - 60",
+                                "5": "60+"
+                            },
+                            "default_value": [
+                                "Select"
+                            ],
+                            "return_format": "array",
+                            "allow_custom": 0,
+                            "allow_in_bindings": 0,
+                            "layout": "vertical",
+                            "toggle": 0,
+                            "save_custom": 0,
+                            "custom_choice_button_text": "Add new choice"
+                        },
+                        {
+                            "key": "field_69bb9bc6501b1",
+                            "label": "Gender",
+                            "name": "gender",
+                            "aria-label": "",
+                            "type": "radio",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "m": "Male",
+                                "f": "Female",
+                                "o": "Other"
+                            },
+                            "default_value": "",
+                            "return_format": "array",
+                            "allow_null": 0,
+                            "other_choice": 0,
+                            "allow_in_bindings": 0,
+                            "layout": "vertical",
+                            "save_other_choice": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "min": "",
+            "max": "",
+            "button_label": "Add Row"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1773903447
+}

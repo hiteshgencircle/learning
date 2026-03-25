@@ -1,22 +1,20 @@
 import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite';
 import laravel from 'laravel-vite-plugin'
 import { wordpressPlugin, wordpressThemeJson } from '@roots/vite-plugin';
 
 // Set APP_URL if it doesn't exist for Laravel Vite plugin
 if (! process.env.APP_URL) {
-  process.env.APP_URL = 'http://example.test';
+  process.env.APP_URL = 'https://bedrock.test';
 }
 
 export default defineConfig({
-  base: '/app/themes/sage/public/build/',
+  base: '/app/themes/sage-learning/public/build/',
   plugins: [
-    tailwindcss(),
     laravel({
       input: [
-        'resources/css/app.css',
-        'resources/js/app.js',
-        'resources/css/editor.css',
+        // 'resources/css/app.scss',
+        // 'resources/js/app.js',
+        'resources/css/editor.scss',
         'resources/js/editor.js',
       ],
       refresh: true,

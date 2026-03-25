@@ -1,0 +1,33 @@
+@if($page_builder && count($page_builder))
+    @foreach($page_builder as $section)
+        @switch($section["acf_fc_layout"])
+            @case("banner")
+                @include('partials.page-builder.banner')
+                @break
+            @case("full_width_cta")
+                @include('partials.page-builder.full-width-cta')
+                @break
+            @case("two_column_with_image")
+                @include('partials.page-builder.two-column-with-image')
+                @break
+            @case("cta_full_width_image")
+                @include('partials.page-builder.cta-full-width-image')
+                @break
+            @case("three_column_with_title_description")
+                @include('partials.page-builder.three-column-with-title-description')
+                @break
+            @case("testimonials")
+                @include('partials.page-builder.testimonials')
+                @break
+            @case("slider")
+                @include('partials.page-builder.slider')
+                @break
+            @case("image_grid")
+                @include('partials.page-builder.image-grid')
+                @break
+            @case("three_column_with_slider")
+                @include('partials.page-builder.three-column-with-slider')
+                @break
+        @endswitch
+    @endforeach
+@endif
