@@ -7,14 +7,17 @@
 namespace App;
 
 use Illuminate\Support\Facades\Vite;
-
+use \App\Fields\HeroFields;
+use App\Api\Products;
+use App\PostTypes\Stay;
+define("STAY_POST_TYPE", "stay");
 /**
  * Inject styles into the block editor.
  *
  * @return array
  */
 add_filter('block_editor_settings_all', function ($settings) {
-    $style = Vite::asset('resources/css/editor.css');
+    $style = Vite::asset('resources/css/editor.scss');
 
     $settings['styles'][] = [
         'css' => "@import url('{$style}')",
@@ -84,7 +87,9 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
     register_nav_menus([
-        'primary_navigation' => __('Primary Navigation', 'sage'),
+        'main_menu' => __('Main Menu', 'sage'),
+        'hamburger_menu' => __('Hamburger menu', 'sage'),
+        'hamburger_menu_2' => __('Hamburger menu 2', 'sage'),
     ]);
 
     /**
@@ -136,6 +141,13 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/add_theme_support/#customize-selective-refresh-widgets
      */
     add_theme_support('customize-selective-refresh-widgets');
+
+    add_theme_support('custom-logo', [
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ]);
 }, 20);
 
 /**
@@ -160,4 +172,70 @@ add_action('widgets_init', function () {
         'name' => __('Footer', 'sage'),
         'id' => 'sidebar-footer',
     ] + $config);
+});
+
+
+add_filter("acf/settings/save_json", function () {
+    return get_stylesheet_directory() . '/acf-json';
+} );
+
+
+add_filter('acf/settings/load_json', function ($paths) {
+    $paths[] = get_stylesheet_directory() . '/acf-json';
+    return $paths;
+});
+
+add_action('acf/init', function() {
+    if (! function_exists('acf_add_local_field_group')) {
+        return;
+    }
+    HeroFields::register();
+});
+add_action("init", function() {
+    Stay::register();
+});
+
+//add_action('acf/register_block_types', function () {
+//    acf_register_block_type([
+//        "name" => __("hero", "sage"),
+//        "title" => __("Hero Block", "sage"),
+//        "render_callback" => function($block) {
+//            echo view('blocks.hero', ['block' => $block]);
+//        },
+//    ]);
+//});
+
+add_action("rest_api_init", function () {
+    Products::register();
+});
+
+add_action("wp_enqueue_scripts", function () {
+//        wp_enqueue_script("sage/js", Vite::asset("resources/js/app.js"), [], "1.0.0", true);
+    wp_print_inline_script_tag(
+        'window.sageData = '. wp_json_encode([
+            'restUrl' => esc_url(rest_url('sage/v1')),
+            'nonce' => wp_create_nonce('wp_rest'),
+        ])
+    );
+});
+
+add_action("wp_enqueue_scripts", function () {
+    wp_enqueue_style("gangtey_style", get_stylesheet_directory_uri() . '/resources/css/style.css', [], time());
+
+    wp_enqueue_script("jquery");
+
+    wp_enqueue_style(
+        'swiper-css',
+        'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'
+    );
+
+    wp_enqueue_script(
+        'swiper-js',
+        'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
+        [],
+        null,
+        true
+    );
+
+    wp_enqueue_script("gangtey_script", get_stylesheet_directory_uri() . '/resources/js/script.js', ['jquery'], time(), true);
 });
