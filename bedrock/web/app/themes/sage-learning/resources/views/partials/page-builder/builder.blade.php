@@ -37,6 +37,12 @@
             @case("two_column_with_tabbed_content")
                 @include('partials.page-builder.two-column-with-tabbed-content')
                 @break
+            @case("faq_block")
+                @include('partials.page-builder.faq-block')
+                @break
+            @case("testimonials_slider_with_image")
+                @include('partials.page-builder.testimonials-slider-with-image')
+                @break
         @endswitch
     @endforeach
 @endif
